@@ -1,6 +1,0 @@
-chrome:
-  version: 119
-  threadsNumber: 2
-  args: --no-sandbox, --disable-infobars, --disable-notifications
-  prefs:
-    'download.default_directory': /temp

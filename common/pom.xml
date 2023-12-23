@@ -9,30 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.shukalovi.selenium.base.framework.web</groupId>
-    <artifactId>web-core</artifactId>
+    <groupId>ch.shukalovi.selenium.base.framework.common</groupId>
+    <artifactId>common-util</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <selenium.version>4.16.1</selenium.version>
-        <framework.utils.version>0.0.1-SNAPSHOT</framework.utils.version>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>${selenium.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.shukalovi.selenium.base.framework.common</groupId>
-            <artifactId>common-util</artifactId>
-            <version>${framework.utils.version}</version>
-        </dependency>
-
-    </dependencies>
 
     <build>
         <plugins>

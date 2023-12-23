@@ -20,7 +20,7 @@ import java.util.Map;
 
 import static ch.shukalovi.selenium.base.framework.common.util.constant.CommonConstant.THREAD_SCOPE;
 
-@Import({ThreadScopeConfig.class})
+// TODO: get rid of imports
 @Configuration
 @EnableConfigurationProperties({ChromeProperties.class, FirefoxProperties.class, EdgeProperties.class})
 public class WebConfig {
@@ -55,7 +55,6 @@ public class WebConfig {
     }
 
     @Bean
-    @Scope(scopeName = THREAD_SCOPE)
     @Qualifier(value = "edge")
     public MutableCapabilities edgeOptions(EdgeProperties props) {
         EdgeOptions edgeOptions = new EdgeOptions();

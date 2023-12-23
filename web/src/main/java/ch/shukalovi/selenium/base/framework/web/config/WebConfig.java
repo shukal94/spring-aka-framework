@@ -1,6 +1,5 @@
 package ch.shukalovi.selenium.base.framework.web.config;
 
-import ch.shukalovi.selenium.base.framework.common.config.ThreadScopeConfig;
 import ch.shukalovi.selenium.base.framework.web.config.properties.impl.ChromeProperties;
 import ch.shukalovi.selenium.base.framework.web.config.properties.impl.EdgeProperties;
 import ch.shukalovi.selenium.base.framework.web.config.properties.impl.FirefoxProperties;
@@ -13,12 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Scope;
-
 import java.util.Map;
 
-import static ch.shukalovi.selenium.base.framework.common.util.constant.CommonConstant.THREAD_SCOPE;
 
 // TODO: get rid of imports
 @Configuration

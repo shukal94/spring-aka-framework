@@ -2,8 +2,9 @@ package ch.shukalovi.selenium.base.framework.web.config.properties;
 
 import lombok.Data;
 
-//TODO: add platform
 @Data
-public abstract class PropertiesBase implements Capabilities {
+public abstract class PropertiesBase implements Properties {
     private String version;
+    private String platformName;
+    private Boolean acceptInsecureCerts;
 }

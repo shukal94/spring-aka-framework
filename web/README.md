@@ -20,6 +20,8 @@ web:
   baseUrl: http://google.com
 ```
 , where `browser` has a value one of [chrome, firefox, edge]
+
+Example for `chrome`
 ```yaml
 chrome:
   platformName: mac
@@ -35,7 +37,9 @@ chrome:
       'content_settings.pattern_pairs.*.multiple-automatic-downloads': 1
       default_content_settings:
         popups: 0
-
+```
+Example for `firefox`
+```yaml
 firefox:
   platformName: mac
   version: 102.0
@@ -49,7 +53,9 @@ firefox:
         folderList: 2
         manager:
           showWhenStarting: false
-
+```
+Example for `edge`
+```yaml
 edge:
   platformName: mac
   version: 102.0
@@ -59,5 +65,4 @@ edge:
     EnableNativeEvents: false
     ignoreZoomSetting: true
     'ms:edgeChromium': true
-
 ```

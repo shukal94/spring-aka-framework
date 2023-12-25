@@ -20,9 +20,6 @@ public class WebConfig {
     @Value("${web.browser}")
     private String browser;
 
-    @Value("${web.baseUrl}")
-    private String baseUrl;
-
     private final MutableCapabilities capabilities;
 
     public WebConfig(MutableCapabilities capabilities) {

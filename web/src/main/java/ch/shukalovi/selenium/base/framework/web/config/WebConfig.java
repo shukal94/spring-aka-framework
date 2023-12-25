@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Scope;
 
+import java.net.URL;
+
 import static ch.shukalovi.selenium.base.framework.common.util.constant.CommonConstant.THREAD_SCOPE;
 
 // TODO: get rid of imports
@@ -19,6 +21,9 @@ import static ch.shukalovi.selenium.base.framework.common.util.constant.CommonCo
 public class WebConfig {
     @Value("${web.browser}")
     private String browser;
+
+    @Value("%{web.seleniumUrl}")
+    private URL seleniumUrl;
 
     private final MutableCapabilities capabilities;
 
@@ -29,7 +34,7 @@ public class WebConfig {
     @Bean
     @Scope(scopeName = THREAD_SCOPE)
     public WebDriver webDriver() {
-        RemoteWebDriver webDriver = new RemoteWebDriver(capabilities);
+        RemoteWebDriver webDriver = new RemoteWebDriver(seleniumUrl, capabilities);
         webDriver.setFileDetector(new LocalFileDetector());
         return webDriver;
     }

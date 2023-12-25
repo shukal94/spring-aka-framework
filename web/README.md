@@ -13,7 +13,7 @@ Provides an essential kit for Web automation
 to enable threaded web-driver mode;
 3. Install and start selenium grid locally.
 ## Configuration
-browser, baseUrl, platformName, version, acceptInsecureCerts, pageLoadStrategy (if using `edge`) are mandatory fields
+browser, seleniumUrl, applicationUrl, platformName, version, acceptInsecureCerts, pageLoadStrategy (if using `edge`) are mandatory fields
 ```yaml
 web:
   browser: chrome

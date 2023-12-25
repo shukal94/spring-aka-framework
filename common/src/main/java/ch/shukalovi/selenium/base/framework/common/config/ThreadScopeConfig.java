@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ThreadScopeConfig {
     @Bean
-    public ThreadScopeBeanFactoryPostProcessor threadScopeBFPP() {
+    public static ThreadScopeBeanFactoryPostProcessor threadScopeBFPP() {
         return new ThreadScopeBeanFactoryPostProcessor();
     }
 }

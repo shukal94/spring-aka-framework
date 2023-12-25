@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +13,6 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "chrome")
 public class ChromeProperties extends PropertiesBase {
     private List<String> args;
-    private Map<String, Object> prefs;
 
-    public void setArgs(String args) {
-        String[] argsTemp = args.split(",");
-        this.args = Arrays.stream(argsTemp).map(String::trim).toList();
-    }
+    private Map<String, Object> prefs;
 }

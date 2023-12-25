@@ -13,6 +13,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "edge")
 public class EdgeProperties extends PropertiesBase {
     private PageLoadStrategy pageLoadStrategy;
+
     private Map<String, Object> capabilities;
 
     public void setPageLoadStrategy(String pageLoadStrategy) {

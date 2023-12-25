@@ -1,67 +1,50 @@
 package ch.shukalovi.selenium.base.framework.web.config;
 
-import ch.shukalovi.selenium.base.framework.web.config.properties.impl.ChromeProperties;
-import ch.shukalovi.selenium.base.framework.web.config.properties.impl.EdgeProperties;
-import ch.shukalovi.selenium.base.framework.web.config.properties.impl.FirefoxProperties;
+import ch.shukalovi.selenium.base.framework.common.config.ThreadScopeConfig;
+import ch.shukalovi.selenium.base.framework.web.exception.UnsupportedBrowserException;
 import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import java.util.Map;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Scope;
 
+import static ch.shukalovi.selenium.base.framework.common.util.constant.CommonConstant.THREAD_SCOPE;
 
 // TODO: get rid of imports
+@Import({ThreadScopeConfig.class})
 @Configuration
-@EnableConfigurationProperties({ChromeProperties.class, FirefoxProperties.class, EdgeProperties.class})
 public class WebConfig {
-    @Bean
-    @Qualifier(value = "chrome")
-    public MutableCapabilities chromeOptions(ChromeProperties props) {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments(props.getArgs());
-        Map<String, Object> experimentalOptions = props.getPrefs();
-        experimentalOptions.keySet().forEach(k -> options.setExperimentalOption(k, experimentalOptions.get(k)));
-        options.setBrowserVersion(props.getVersion());
-        options.setAcceptInsecureCerts(props.getAcceptInsecureCerts());
-        options.setPlatformName(props.getPlatformName());
+    @Value("${browser}")
+    private String browser;
 
-        return options;
+    private final MutableCapabilities capabilities;
+
+    public WebConfig(MutableCapabilities capabilities) {
+        this.capabilities = capabilities;
     }
 
     @Bean
-    @Qualifier(value = "firefox")
-    public MutableCapabilities firefoxOptions(FirefoxProperties props) {
-        FirefoxProfile browserProfile = new FirefoxProfile();
-        browserProfile.setAcceptUntrustedCertificates(props.getAcceptInsecureCerts());
-        Map<String, Object> prefs = props.getPrefs();
-        prefs.keySet().forEach(k -> browserProfile.setPreference(k, prefs.get(k)));
-
-        FirefoxOptions options = new FirefoxOptions();
-        options.setProfile(browserProfile);
-        options.setBrowserVersion(props.getVersion());
-        options.setPlatformName(props.getPlatformName());
-
-        return options;
+    @Scope(scopeName = THREAD_SCOPE)
+    public WebDriver webDriver() {
+        switch (browser) {
+            case "chrome" -> {
+                return new ChromeDriver((ChromeOptions) capabilities);
+            }
+            case "firefox" -> {
+                return new FirefoxDriver((FirefoxOptions) capabilities);
+            }
+            case "edge" -> {
+                return new EdgeDriver((EdgeOptions) capabilities);
+            }
+            default -> throw new UnsupportedBrowserException(String.format("Unsupported browser %s!", browser));
+        }
     }
-
-    @Bean
-    @Qualifier(value = "edge")
-    public MutableCapabilities edgeOptions(EdgeProperties props) {
-        EdgeOptions edgeOptions = new EdgeOptions();
-        edgeOptions.setPageLoadStrategy(props.getPageLoadStrategy());
-        edgeOptions.setPlatformName(props.getPlatformName());
-        edgeOptions.setBrowserVersion(props.getVersion());
-        edgeOptions.setAcceptInsecureCerts(props.getAcceptInsecureCerts());
-
-        Map<String, Object> capabilities = props.getCapabilities();
-        capabilities.keySet().forEach(k -> edgeOptions.setCapability(k, capabilities.get(k)));
-
-        return edgeOptions;
-    }
-
 }

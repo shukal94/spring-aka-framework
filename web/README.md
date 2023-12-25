@@ -2,9 +2,15 @@
 Provides an essential kit for Web automation
 ##Installation
 1. Import this artifact as a maven dependency
+2. Install and start selenium grid locally
 ##Configuration
-Example
-platformName, version, acceptInsecureCerts are mandatory fields
+browser, baseUrl, platformName, version, acceptInsecureCerts, pageLoadStrategy (if using `edge`) are mandatory fields
+```yaml
+web:
+  browser: chrome
+  baseUrl: http://google.com
+```
+, where `browser` has a value one of [chrome, firefox, edge]
 ```yaml
 chrome:
   platformName: mac

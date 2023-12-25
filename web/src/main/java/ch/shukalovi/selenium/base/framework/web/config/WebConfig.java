@@ -1,15 +1,10 @@
 package ch.shukalovi.selenium.base.framework.web.config;
 
 import ch.shukalovi.selenium.base.framework.common.config.ThreadScopeConfig;
-import ch.shukalovi.selenium.base.framework.web.exception.UnsupportedBrowserException;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.LocalFileDetector;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +17,11 @@ import static ch.shukalovi.selenium.base.framework.common.util.constant.CommonCo
 @Import({ThreadScopeConfig.class})
 @Configuration
 public class WebConfig {
-    @Value("${browser}")
+    @Value("${web.browser}")
     private String browser;
+
+    @Value("${web.baseUrl}")
+    private String baseUrl;
 
     private final MutableCapabilities capabilities;
 
@@ -34,17 +32,8 @@ public class WebConfig {
     @Bean
     @Scope(scopeName = THREAD_SCOPE)
     public WebDriver webDriver() {
-        switch (browser) {
-            case "chrome" -> {
-                return new ChromeDriver((ChromeOptions) capabilities);
-            }
-            case "firefox" -> {
-                return new FirefoxDriver((FirefoxOptions) capabilities);
-            }
-            case "edge" -> {
-                return new EdgeDriver((EdgeOptions) capabilities);
-            }
-            default -> throw new UnsupportedBrowserException(String.format("Unsupported browser %s!", browser));
-        }
+        RemoteWebDriver webDriver = new RemoteWebDriver(capabilities);
+        webDriver.setFileDetector(new LocalFileDetector());
+        return webDriver;
     }
 }

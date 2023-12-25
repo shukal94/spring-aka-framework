@@ -20,7 +20,7 @@ import java.util.Map;
 public class BrowserConfig {
 
     @Bean
-    @ConditionalOnProperty(name="browser", havingValue = "chrome")
+    @ConditionalOnProperty(name="web.browser", havingValue = "chrome")
     public MutableCapabilities chromeOptions(ChromeProperties props) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(props.getArgs());
@@ -34,7 +34,7 @@ public class BrowserConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name="browser", havingValue = "firefox")
+    @ConditionalOnProperty(name="web.browser", havingValue = "firefox")
     public MutableCapabilities firefoxOptions(FirefoxProperties props) {
         FirefoxOptions options = new FirefoxOptions();
         FirefoxProfile browserProfile = new FirefoxProfile();
@@ -50,7 +50,7 @@ public class BrowserConfig {
     }
 
     @Bean
-    @ConditionalOnProperty(name="browser", havingValue = "edge")
+    @ConditionalOnProperty(name="web.browser", havingValue = "edge")
     public MutableCapabilities edgeOptions(EdgeProperties props) {
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.setPageLoadStrategy(props.getPageLoadStrategy());

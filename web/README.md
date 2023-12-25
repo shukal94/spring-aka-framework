@@ -1,9 +1,18 @@
-#Web 
+# Web 
 Provides an essential kit for Web automation
-##Installation
-1. Import this artifact as a maven dependency
-2. Install and start selenium grid locally
-##Configuration
+## Installation
+1. Import this artifact as a maven dependency;
+2. Import
+```xml
+<dependency>
+    <groupId>ch.shukalovi.selenium.base.framework.common</groupId>
+    <artifactId>common-util</artifactId>
+    <version>${framework.utils.version}</version>
+</dependency>
+```
+to enable threaded web-driver mode;
+3. Install and start selenium grid locally.
+## Configuration
 browser, baseUrl, platformName, version, acceptInsecureCerts, pageLoadStrategy (if using `edge`) are mandatory fields
 ```yaml
 web:

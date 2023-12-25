@@ -1,6 +1,7 @@
 package ch.shukalovi.selenium.base.framework.web.config;
 
 import ch.shukalovi.selenium.base.framework.common.config.ThreadScopeConfig;
+import lombok.SneakyThrows;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.LocalFileDetector;
@@ -22,8 +23,8 @@ public class WebConfig {
     @Value("${web.browser}")
     private String browser;
 
-    @Value("%{web.seleniumUrl}")
-    private URL seleniumUrl;
+    @Value("${web.seleniumUrl}")
+    private String seleniumUrl;
 
     private final MutableCapabilities capabilities;
 
@@ -33,8 +34,9 @@ public class WebConfig {
 
     @Bean
     @Scope(scopeName = THREAD_SCOPE)
+    @SneakyThrows
     public WebDriver webDriver() {
-        RemoteWebDriver webDriver = new RemoteWebDriver(seleniumUrl, capabilities);
+        RemoteWebDriver webDriver = new RemoteWebDriver(new URL(seleniumUrl), capabilities);
         webDriver.setFileDetector(new LocalFileDetector());
         return webDriver;
     }

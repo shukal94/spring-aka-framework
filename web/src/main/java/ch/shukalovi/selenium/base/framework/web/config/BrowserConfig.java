@@ -32,6 +32,7 @@ public class BrowserConfig {
         return options;
     }
 
+    // TODO: debug ff setup
     @Bean
     @ConditionalOnProperty(name="web.browser", havingValue = "firefox")
     public MutableCapabilities firefoxOptions(FirefoxProperties props) {
@@ -48,6 +49,7 @@ public class BrowserConfig {
         return options;
     }
 
+    // TODO: debug edge setup
     @Bean
     @ConditionalOnProperty(name="web.browser", havingValue = "edge")
     public MutableCapabilities edgeOptions(EdgeProperties props) {

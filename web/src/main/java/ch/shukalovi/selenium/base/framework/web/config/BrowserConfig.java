@@ -3,7 +3,7 @@ package ch.shukalovi.selenium.base.framework.web.config;
 import ch.shukalovi.selenium.base.framework.web.config.properties.impl.ChromeProperties;
 import ch.shukalovi.selenium.base.framework.web.config.properties.impl.EdgeProperties;
 import ch.shukalovi.selenium.base.framework.web.config.properties.impl.FirefoxProperties;
-import org.openqa.selenium.MutableCapabilities;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -21,7 +21,7 @@ public class BrowserConfig {
 
     @Bean
     @ConditionalOnProperty(name="web.browser", havingValue = "chrome")
-    public MutableCapabilities chromeOptions(ChromeProperties props) {
+    public Capabilities chromeOptions(ChromeProperties props) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(props.getArgs());
         options.setExperimentalOption("prefs", props.getPrefs());
@@ -35,7 +35,7 @@ public class BrowserConfig {
     // TODO: debug ff setup
     @Bean
     @ConditionalOnProperty(name="web.browser", havingValue = "firefox")
-    public MutableCapabilities firefoxOptions(FirefoxProperties props) {
+    public Capabilities firefoxOptions(FirefoxProperties props) {
         FirefoxOptions options = new FirefoxOptions();
         FirefoxProfile browserProfile = new FirefoxProfile();
         browserProfile.setAcceptUntrustedCertificates(props.getAcceptInsecureCerts());
@@ -52,7 +52,7 @@ public class BrowserConfig {
     // TODO: debug edge setup
     @Bean
     @ConditionalOnProperty(name="web.browser", havingValue = "edge")
-    public MutableCapabilities edgeOptions(EdgeProperties props) {
+    public Capabilities edgeOptions(EdgeProperties props) {
         EdgeOptions edgeOptions = new EdgeOptions();
         edgeOptions.setPageLoadStrategy(props.getPageLoadStrategy());
         edgeOptions.setPlatformName(props.getPlatformName());

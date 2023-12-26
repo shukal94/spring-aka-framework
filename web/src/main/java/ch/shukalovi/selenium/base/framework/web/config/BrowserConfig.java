@@ -24,8 +24,7 @@ public class BrowserConfig {
     public MutableCapabilities chromeOptions(ChromeProperties props) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(props.getArgs());
-        Map<String, Object> experimentalOptions = props.getPrefs();
-        experimentalOptions.keySet().forEach(k -> options.setExperimentalOption(k, experimentalOptions.get(k)));
+        options.setExperimentalOption("prefs", props.getPrefs());
         options.setBrowserVersion(props.getVersion());
         options.setAcceptInsecureCerts(props.getAcceptInsecureCerts());
         options.setPlatformName(props.getPlatformName());
